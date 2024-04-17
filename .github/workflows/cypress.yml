@@ -9,8 +9,7 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
-          # Linux and MacOS
-          start: npm start
+          build: npm run build
       - name: e2e tests
         uses: cypress-io/github-action@v6
         with:
