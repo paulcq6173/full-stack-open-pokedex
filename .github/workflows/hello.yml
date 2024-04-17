@@ -1,0 +1,23 @@
+name: Hello World!
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  hello_world_job:
+    runs-on: archlinux-6.8.5
+    steps:
+      - name: Say hello
+        run: |
+          echo "Hello World!"
+    steps:
+      - name: Now it is
+        run: |
+          date
+    steps:
+      - name: Directory content
+        run: |
+          ls -l
+
