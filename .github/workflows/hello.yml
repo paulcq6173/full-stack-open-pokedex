@@ -1,4 +1,4 @@
-name: Hello World!
+name: GitHub Actions Demo
 
 on:
   push:
@@ -6,13 +6,19 @@ on:
       - main
 
 jobs:
-  hello_world_job:
-    runs-on: ubuntu-20.04
+  Explore-GitHub-Actions:
+    runs-on: ubuntu-latest
     steps:
+      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
       - name: Say hello
-        run: echo "Hello World!"
+        run: |
+          echo "Hello World!"
       - name: Now it is
-        run: date
+        run: |
+          date
       - name: Directory content
-        run: ls -l
+        run: |
+          ls -l
 
