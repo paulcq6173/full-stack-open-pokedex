@@ -26,16 +26,18 @@ jobs:
           key: ${{ runner.os }}-pnpm-store-${{ hashFiles('pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
-      - name: Install dependencies with npm
-        run: npm install
+      - name: Install dependencies with pnpm
+        run: pnpm install
       - name: Check style
-        run: npm run eslint
+        run: pnpm run eslint
       - name: Build
-        run: npm run build
+        uses: cypress-io/github-action@v6
+        with:
+          build: pnpm run build
       - name: E2E Test
         uses: cypress-io/github-action@v6
         with:
           spec: cypress/e2e/poke.spec.cy.js
-          start: npm run start-prod
-          command: npm run test:e2e
+          start: pnpm run start-prod
+          command: pnpm run test:e2e
           wait-on: http://localhost:5000
