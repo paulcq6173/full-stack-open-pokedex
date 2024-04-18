@@ -10,10 +10,8 @@ app.get('/version', (req, res) => {
   res.send('2'); // change this string to ensure a new version deployed
 });
 
-// For health cehck
+// health cehck endpoint
 app.get('/health', (req, res) => {
-  // eslint-disable-next-line no-constant-condition
-  if (true) throw 'error...  ';
   res.send('ok');
 });
 
