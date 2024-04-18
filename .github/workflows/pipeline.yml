@@ -33,7 +33,7 @@ jobs:
       - name: Build
         run: pnpm run build
       - name: Install cypress
-        uses: CYPRESS_CACHE_FOLDER=~/cypress_cache cypress install
+        run: CYPRESS_CACHE_FOLDER=~/cypress_cache cypress install
       - name: E2E Test
         uses: cypress-io/github-action@v6
         with:
