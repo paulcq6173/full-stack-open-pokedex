@@ -22,24 +22,22 @@ jobs:
       - name: Setup pnpm cache
         uses: actions/cache@v4
         with:
-          path: |
-            ~/cypress_cache
-            ${{ env.STORE_PATH }}
+          path: ${{ env.STORE_PATH }}
           key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
-      - name: Install axios
-        run: pnpm add axios
       - name: Install dependencies with pnpm
         run: pnpm install
       - name: Check style
         run: pnpm run eslint
       - name: Build
         run: pnpm run build
+      - name: Install cypress
+        uses: CYPRESS_CACHE_FOLDER=~/cypress_cache cypress install
       - name: E2E Test
         uses: cypress-io/github-action@v6
         with:
           spec: cypress/e2e/poke.spec.cy.js
           start: pnpm run start-prod
           command: pnpm run test:e2e
-          wait-on: http://[::1]:5000
+          wait-on: http://localhost:5000
