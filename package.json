@@ -9,7 +9,8 @@
     "eslint": "eslint './**/*.{js,jsx}'",
     "build": "webpack --mode production",
     "test": "jest",
-    "test:e2e": "CYPRESS_CACHE_FOLDER=~/cypress_cache cypress open"
+    "cypress:open": "CYPRESS_CACHE_FOLDER=~/cypress_cache cypress open",
+    "test:e2e": "CYPRESS_CACHE_FOLDER=~/cypress_cache cypress run"
   },
   "repository": {
     "type": "git",
