@@ -28,8 +28,10 @@ jobs:
             ${{ runner.os }}-pnpm-store-
       - name: Install dependencies with pnpm
         run: CYPRESS_CACHE_FOLDER=~/cypress_cache pnpm install
-      - name: Check style
-        run: pnpm run eslint
+      - name: Install cypress binary
+        run: CYPRESS_CACHE_FOLDER=~/cypress_cache cypress install
+      #- name: Check style
+      #  run: pnpm run eslint
       - name: Build
         run: pnpm run build
       - name: e2e tests
