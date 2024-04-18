@@ -29,7 +29,7 @@ jobs:
       - name: Install dependencies with pnpm
         run: CYPRESS_CACHE_FOLDER=~/cypress_cache pnpm install
       - name: Install cypress binary
-        run: CYPRESS_CACHE_FOLDER=~/cypress_cache cypress install
+        run: CYPRESS_CACHE_FOLDER=~/cypress_cache pnpm add cypress
       #- name: Check style
       #  run: pnpm run eslint
       - name: Build
