@@ -30,8 +30,8 @@ jobs:
         run: CYPRESS_CACHE_FOLDER=~/cypress_cache pnpm install
       - name: Install cypress binary
         run: CYPRESS_CACHE_FOLDER=~/cypress_cache npx cypress install
-      #- name: Check style
-      #  run: pnpm run eslint
+      - name: Check style
+        run: pnpm run eslint
       - name: Build
         run: pnpm run build
       - name: e2e tests
@@ -41,3 +41,5 @@ jobs:
           spec: cypress/e2e/poke.spec.cy.js
           command: pnpm run test:e2e
           wait-on: http://127.0.0.1:5000
+      - name: Trigger deployment
+        run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
