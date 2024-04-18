@@ -31,11 +31,13 @@ jobs:
       - name: Check style
         run: pnpm run eslint
       - name: Build
-        run: pnpm run build
+        uses: cypress-io/github-action@v6
+        with:
+          build: npm run build
       - name: E2E Test
         uses: cypress-io/github-action@v6
         with:
           spec: cypress/e2e/poke.spec.cy.js
-          start: pnpm run start-prod
           command: pnpm run test:e2e
+          start: pnpm run start-prod
           wait-on: http://localhost:5000
