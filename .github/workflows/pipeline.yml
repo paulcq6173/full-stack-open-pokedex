@@ -30,12 +30,11 @@ jobs:
         run: CYPRESS_CACHE_FOLDER=~/cypress_cache pnpm install
       - name: Check style
         run: pnpm run eslint
-      - name: Build
-        run: pnpm run build
+      - name: Build and Run Production build
+        run: pnpm run build && pnpm run start-prod
       - name: E2E Test
         uses: cypress-io/github-action@v6
         with:
           spec: cypress/e2e/poke.spec.cy.js
-          command: pnpm run test:e2e
-          start: pnpm run start-prod
-          wait-on: http://[::1]:5000
+          run: pnpm run test:e2e
+          #wait-on: http://127.0.0.1:5000
