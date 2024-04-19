@@ -50,6 +50,8 @@ jobs:
   tag_release:
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-22.04
+    permissions:
+      contents: write
     steps:
       - name: Bump version and push tag
         if: ${{ github.event_name == 'push' }}
@@ -58,3 +60,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
           DRY_RUN: true
+        with:
+          command: git init
