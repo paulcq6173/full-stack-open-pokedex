@@ -9,7 +9,6 @@ jobs:
   a_test_job:
     runs-on: ubuntu-22.04
     steps:
-      #if: ${{ contains(github.event.commits, 'skip') }}
       - uses: actions/checkout@v4
       - name: github context
         env:
