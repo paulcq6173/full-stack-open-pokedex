@@ -60,6 +60,7 @@ jobs:
         if: failure()
         with:
           severity: error
+          text: Build failed
           details: commit ${{ github.event.pull_request.head.sha by Committer }} broken the build
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
   tag_release:
