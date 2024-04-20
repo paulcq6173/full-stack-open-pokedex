@@ -1,5 +1,10 @@
 name: Schedule Tasks
 
+on:
+  push:
+    branches:
+      - main
+
 jobs:
   Scheduled-Health-Check:
     runs-on: ubuntu-22.04
