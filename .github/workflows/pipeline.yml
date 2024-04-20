@@ -61,7 +61,7 @@ jobs:
         with:
           severity: error
           text: Build failed
-          details: commit ${{ github.event.push.head.sha }} by pualcq6173 broke the build
+          details: commit ${{ github.event.push.commits[][sha] }} by pualcq6173 broke the build
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
   tag_release:
     needs: [simple_deployment_pipeline]
