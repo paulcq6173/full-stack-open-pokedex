@@ -61,7 +61,7 @@ jobs:
         with:
           severity: error
           text: Build failed
-          details: ${{ commit github.event.pull_request.head.sha by Committer broken the build }}
+          details: commit ${{ github.event.pull_request.head.sha }} by ${{ Committer }} broken the build
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
   tag_release:
     needs: [simple_deployment_pipeline]
