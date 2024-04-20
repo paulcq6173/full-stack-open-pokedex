@@ -1,9 +1,9 @@
 name: Schedule Tasks
 
 on:
-  push:
-    branches:
-      - main
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron: '00 12,13 * * *'
 
 jobs:
   Scheduled-Health-Check:
@@ -14,3 +14,11 @@ jobs:
         with:
           # Check the following URLs one by one sequentially
           url: https://full-stack-open-pokedex-3xit.onrender.com
+      - name: Notify Success
+        uses: rjstone/discord-webhook-notify@v1.0.4
+        if: success()
+        with:
+          severity: info
+          text: Server status all green.
+          details: Healthcheck successful
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
