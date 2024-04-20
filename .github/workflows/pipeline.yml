@@ -57,7 +57,7 @@ jobs:
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: Notify Failure
         uses: rjstone/discord-webhook-notify@v1.0.4
-        if: failure()
+        if: ${{ failure() && github.event_name == 'push' && !contains(toJson(github.event.commits.*.message), '#skip') }}
         with:
           severity: error
           text: Build failed
