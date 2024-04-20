@@ -50,14 +50,18 @@ jobs:
       - name: Notify Success
         uses: rjstone/discord-webhook-notify@v1.0.4
         if: success() && ${{ github.event_name == 'push' && !contains(toJson(github.event.commits.*.message), '#skip') }}
+        env:
+          Committer: pualcq6173
         with:
           severity: info
           text: A new version of pokedev deployed
-          details: to https://full-stack-open-pokedex-3xit.onrender.com/ by pualcq6173
+          details: to https://full-stack-open-pokedex-3xit.onrender.com/ by ${{ Committer }}
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: Notify Failure
         uses: rjstone/discord-webhook-notify@v1.0.4
         if: failure()
+        env:
+          Committer: pualcq6173
         with:
           severity: error
           text: Build failed
