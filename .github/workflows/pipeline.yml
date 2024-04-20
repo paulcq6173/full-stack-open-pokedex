@@ -49,17 +49,24 @@ jobs:
         run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
       - name: Notify Success
         uses: rjstone/discord-webhook-notify@v1.0.4
-        if: success()
+        if: success() && ${{ github.event_name == 'push' && !contains(toJson(github.event.commits.*.message), '#skip') }}
+        env:
+          Committer: pualcq6173
+          SiteUrl: https://full-stack-open-pokedex-3xit.onrender.com
         with:
           severity: info
-          details: Deployment Succeeded!
+          text: A new version of pokedev deployed
+          details: to $SiteUrl by $Committer
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: Notify Failure
         uses: rjstone/discord-webhook-notify@v1.0.4
         if: failure()
+        env:
+          Committer: pualcq6173
         with:
           severity: error
-          details: Deployment Failed!
+          text: Build failed
+          details: commit ${{ github.event.pull_request.head.sha }} by $Committer broken the build
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
   tag_release:
     needs: [simple_deployment_pipeline]
